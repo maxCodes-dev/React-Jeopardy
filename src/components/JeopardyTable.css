@@ -1,0 +1,31 @@
+.jeopardy-table {
+  border: solid 2px currentColor;
+  background-color: #242424;
+  width: 640px;
+  display: table;
+  border-collapse: collapse;
+}
+
+.jeopardy-table th,
+.jeopardy-table td {
+  border: solid 2px currentColor;
+  text-wrap: balanced;
+  width: 20%;
+  padding: 4px;
+}
+
+.jeopardy-table > thead th {
+  height: calc(2em + 8px);
+}
+
+.jeopardy-table td > button {
+  background: inherit;
+  width: 100%;
+  height: 100%;
+}
+
+@media (prefers-color-scheme: light) {
+  .jeopardy-table {
+    background-color: #ffffff;
+  }
+}
