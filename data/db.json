@@ -8,7 +8,7 @@
           "answer": "What is thirteen?"
         },
         "200": {
-          "clue": "He was the first Secretary of the Treasury of the United States of America.",
+          "clue": "This man was the first Secretary of the Treasury of the United States of America.",
           "answer": "Who was Alexander Hamilton?"
         },
         "300": {
@@ -27,25 +27,27 @@
     },
     {
       "title": "Movie Quotes",
-      "100": {
-        "clue": "The line \"Toto, I've a feeling we're not in Kansas anymore\" was uttered in this movie.",
-        "answer": "What is \"The Wizard of Oz\"?"
-      },
-      "200": {
-        "clue": "The line \"No, I am your father\" was uttered in this movie.",
-        "answer": "What is \"Star Wars: The Empire Strikes Back\"?"
-      },
-      "300": {
-        "clue": "",
-        "answer": ""
-      },
-      "400": {
-        "clue": "",
-        "answer": ""
-      },
-      "500": {
-        "clue": "",
-        "answer": ""
+      "questions": {
+        "100": {
+          "clue": "The line \"Toto, I've a feeling we're not in Kansas anymore\" was uttered in this movie.",
+          "answer": "What is \"The Wizard of Oz\"?"
+        },
+        "200": {
+          "clue": "The line \"No, I am your father\" was uttered in this movie.",
+          "answer": "What is \"Star Wars: The Empire Strikes Back\"?"
+        },
+        "300": {
+          "clue": "",
+          "answer": ""
+        },
+        "400": {
+          "clue": "",
+          "answer": ""
+        },
+        "500": {
+          "clue": "",
+          "answer": ""
+        }
       }
     },
     {
@@ -74,7 +76,7 @@
       }
     },
     {
-      "title": "",
+      "title": "Programming",
       "questions": {
         "100": {
           "clue": "",
@@ -85,8 +87,8 @@
           "answer": ""
         },
         "300": {
-          "clue": "",
-          "answer": ""
+          "clue": "This man created the Python programming language.",
+          "answer": "Who is Guido van Rossum?"
         },
         "400": {
           "clue": "",
