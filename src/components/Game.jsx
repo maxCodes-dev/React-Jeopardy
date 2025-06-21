@@ -1,10 +1,12 @@
-import { Suspense, use, useEffect, useState, useRef } from 'react';
+'use client';
+
+import { use, useEffect, useState, useRef } from 'react';
 
 import JeopardyTable from './JeopardyTable';
 import QuestionPopup from './QuestionPopup';
 
-export default function Game() {
-  const [questionsData, setQuestionsData] = useState(null);
+export default function Game({ questionsDataPromise }) {
+  const questionsData = use(questionsDataPromise);
   const [questionData, setQuestionData] = useState({ clue: '', answer: '' });
   const [category, setCategory] = useState('');
   const [points, setPoints] = useState(0);
@@ -12,14 +14,8 @@ export default function Game() {
   const buttonRefs = useRef(null);
 
   useEffect(() => {
-    fetchQuestionData();
+    // fetchQuestionData();
   }, []);
-
-  async function fetchQuestionData() {
-    const questionDataBlob = await fetch('/testSet');
-    const questionData = await questionDataBlob.json();
-    setQuestionsData(questionData.categories);
-  }
 
   function getButtonRefs() {
     if (buttonRefs.current === null) {
@@ -65,21 +61,32 @@ export default function Game() {
     node.disabled = true;
   }
 
+  function resetButtons() {
+    const buttonRefs = getButtonRefs();
+    for (const [rowN, row] of buttonRefs.entries()) {
+      row.forEach((node) => {
+        node.disabled = false;
+      });
+    }
+  }
+
   return (
-    <>
-      {questionsData === null ? null : (
-        <JeopardyTable
-          questionsData={questionsData}
-          onOpenQuestion={openQuestion}
-          getButtonRefs={getButtonRefs}
-        />
-      )}
+    <div className="game">
+      <button onClick={resetButtons}>Reset</button>
+      <br />
+      <br />
+      <JeopardyTable
+        questionsData={questionsData}
+        onOpenQuestion={openQuestion}
+        getButtonRefs={getButtonRefs}
+      />
+
       <QuestionPopup
         questionData={questionData}
         category={category}
         points={points}
         onClose={handleClose}
       />
-    </>
+    </div>
   );
 }
