@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [tsconfigPaths(), react()],
   server: {
     proxy: {
-      '/categories': {
+      '/testSet': {
         target: 'http://localhost:3000',
         changeOrigin: true,
         rewrite: (path) => path,

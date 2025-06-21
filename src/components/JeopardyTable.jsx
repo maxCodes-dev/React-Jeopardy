@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 import QuestionPopup from './QuestionPopup';
 
@@ -10,58 +10,11 @@ import './JeopardyTable.css';
  * @param {CategoryData[]} props.questionsData
  * @returns
  */
-export default function JeopardyTable({ questionsData }) {
-  const [questionData, setQuestionData] = useState({ clue: '', answer: '' });
-  const [category, setCategory] = useState('');
-  const [points, setPoints] = useState(0);
-  /**@type {React.RefObject<?HTMLButtonElement[][]>} */
-  const buttonRefs = useRef(null);
-
-  function getButtonRefs() {
-    if (buttonRefs.current === null) {
-      buttonRefs.current = Array(5);
-      for (const [index, _] of buttonRefs.current.entries()) {
-        buttonRefs.current[index] = Array(5).fill(null);
-      }
-    }
-    return buttonRefs.current;
-  }
-
-  /**
-   *
-   * @param {string} questionCategory
-   * @param {number} score
-   */
-  function openQuestion(questionCategory, score) {
-    const question = questionsData.find(
-      (value) => value.title === questionCategory,
-    ).questions[String(score)];
-    console.log(question);
-    console.log(
-      `${questionCategory} for ${score}\n${question.clue} ${question.answer}`,
-    );
-    setQuestionData(question);
-    setCategory(questionCategory);
-    setPoints(score);
-  }
-
-  function handleClose() {
-    const buttonRefs = getButtonRefs();
-    const node =
-      buttonRefs[points / 100 - 1][
-        questionsData.findIndex((value) => value.title === category)
-      ];
-    console.log(
-      buttonRefs[questionsData.findIndex((value) => value.title === category)],
-    );
-    console.log(points / 100 - 1);
-    node.disabled = true;
-
-    setQuestionData({ clue: '', answer: '' });
-    setCategory('');
-    setPoints(0);
-  }
-
+export default function JeopardyTable({
+  questionsData,
+  onOpenQuestion,
+  getButtonRefs,
+}) {
   const titlesRow = useMemo(
     () => (
       <tr>
@@ -88,7 +41,7 @@ export default function JeopardyTable({ questionsData }) {
                 buttonRefs[index][i] = null;
               };
             }}
-            onClick={() => openQuestion(questionsData[i].title, value)}
+            onClick={() => onOpenQuestion(questionsData[i].title, value)}
           >
             {String(value)}
           </button>
@@ -103,12 +56,6 @@ export default function JeopardyTable({ questionsData }) {
         <thead>{titlesRow}</thead>
         <tbody>{tableBody}</tbody>
       </table>
-      <QuestionPopup
-        questionData={questionData}
-        category={category}
-        points={points}
-        onClose={handleClose}
-      />
     </>
   );
 }
